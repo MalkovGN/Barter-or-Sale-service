@@ -1,9 +1,9 @@
-from django.views.generic.edit import CreateView
-from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 
-from users.models import User
 from users.forms import UserRegistrationForm
+from users.models import User
 
 
 class UserRegistrationView(CreateView):
