@@ -33,6 +33,11 @@
                   {% csrf_token %}
 
                 <div class="form-outline mb-4">
+                  <label class="form-label" for={{ form.username.id_for_label }}>Имя пользователя</label>
+                  {{ form.username }}
+                </div>
+
+                <div class="form-outline mb-4">
                   <label class="form-label" for={{ form.first_name.id_for_label }}>Имя</label>
                   {{ form.first_name }}
                 </div>
@@ -63,7 +68,7 @@
                   value="Зарегистрироваться">
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Уже есть аккаунт? <a href="#!"
+                <p class="text-center text-muted mt-5 mb-0">Уже есть аккаунт? <a href="{% url 'users:login' %}"
                     class="fw-bold text-body"><u>Авторизоваться</u></a></p>
 
               </form>

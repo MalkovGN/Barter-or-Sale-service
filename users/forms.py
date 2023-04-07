@@ -1,10 +1,16 @@
+import uuid
+from datetime import timedelta
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.timezone import now
 
-from users.models import User
+from users.models import EmailVerification, User
 
 
 class UserRegistrationForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': "form-control form-control-lg", 'placeholder': 'Введите имя пользователя'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': "form-control form-control-lg", 'placeholder': 'Введите имя'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
@@ -18,4 +24,15 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+    def save(self, commit=True):
+        user = super(UserRegistrationForm, self).save(commit=True)
+        valid_until = now() + timedelta(hours=24)
+        record = EmailVerification.objects.create(
+            user_code=uuid.uuid4(),
+            user=user,
+            valid_until=valid_until,
+        )
+        record.send_email()
+        return user
