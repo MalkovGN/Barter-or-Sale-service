@@ -2,7 +2,7 @@ import uuid
 from datetime import timedelta
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils.timezone import now
 
 from users.models import EmailVerification, User
@@ -36,3 +36,14 @@ class UserRegistrationForm(UserCreationForm):
         )
         record.send_email()
         return user
+
+
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': "form-control form-control-lg", 'placeholder': 'Введите имя пользователя'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': "form-control form-control-lg", 'placeholder': 'Введите пароль'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
