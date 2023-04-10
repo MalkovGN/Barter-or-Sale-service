@@ -1,10 +1,10 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import HttpResponseRedirect, HttpResponse
+from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
-from users.forms import UserRegistrationForm, UserLoginForm
+from users.forms import UserLoginForm, UserRegistrationForm
 from users.models import EmailVerification, User
 
 
@@ -37,7 +37,3 @@ class UserLoginView(LoginView):
 
 class UserProfileView(TemplateView):
     template_name = 'users/profile.html'
-
-    def get(self, request, *args, **kwargs):
-        username = kwargs['username']
-        return HttpResponse(reverse('users:profile'))
