@@ -2,9 +2,9 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import EmailVerification, User
 
 
@@ -35,5 +35,14 @@ class UserLoginView(LoginView):
     form_class = UserLoginForm
 
 
-class UserProfileView(TemplateView):
+class UserProfileView(UpdateView):
+    model = User
+    form_class = UserProfileForm
     template_name = 'users/profile.html'
+
+    def get_object(self, queryset=None):
+        user = User.objects.get(pk=self.request.user.pk)
+        return user
+
+    def get_success_url(self):
+        return reverse_lazy('users:profile', args=(self.object.username,))
