@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+{% block content %}
+
+    <style>
+    .btn {
+        background-color: #8bc1ab;
+        color: black;
+    }
+    </style>
+
+    <a class="btn btn-secondary btn-lg" href="#">Sale</a>
+
+    <a class="btn btn-secondary btn-lg" href="{% url 'barter:items' %}">Barter</a>
+
+{% endblock %}
