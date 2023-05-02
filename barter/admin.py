@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from barter.models import ItemModel
+
+
+@admin.register(ItemModel)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'place')
