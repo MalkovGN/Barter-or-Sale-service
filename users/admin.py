@@ -5,7 +5,7 @@ from users.models import EmailVerification, User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'username')
+    list_display = ('username', 'first_name')
 
 
 @admin.register(EmailVerification)
