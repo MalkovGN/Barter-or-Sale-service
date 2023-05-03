@@ -1,0 +1,38 @@
+{% extends 'barter/base.html' %}
+
+{% load static %}
+
+{% block content %}
+        <div class="card-view" style="text-align: center">
+            <img src="{{ object.photo.url }}" height="10%" width="25%" >
+            <p class="card-text">
+                <small class="text-body-secondary">
+                    Created at {{ object.date_created.date }}. Sell in {{ object.place }}
+                </small>
+            </p>
+            <div class="card mb-3" style="width: 25%; margin-right: auto; margin-left: auto; text-align: left">
+                  <div class="row g-0">
+                      <div class="card-body">
+                        <h5 class="card-title" style="text-align: center">Продается: {{ object.title }}</h5>
+                        <div class="description" style="position: relative; top: 10%">
+                            <h6 class="card-title">Описание</h6>
+                            <p class="card-text">{{ object.description }}</p>
+                        </div>
+                        <div class="to-contact" style="position: relative; top: 20%">
+                            <h5 style="; text-align: center">Для связи:</h5>
+                            <p>
+                                {{ object.user.first_name }} {{ object.user.last_name }}
+                            </p>
+                            <p class="card-text">Почта: {{ object.user.email }}</p>
+                            <p class="card-text">Город: {{ object.place }}</p>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+            <a href="{% url 'barter:items' %}" type="button" class="btn btn-lg btn-dark" style="position: relative; margin-top: 5%;">
+                Назад
+            </a>
+        </div>
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
 from barter.models import ItemModel
@@ -20,6 +21,9 @@ class CreateAnnouncementView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        if len(form.cleaned_data['description']) <= 25:
-            form.cleaned_data['description'] += 3 * '\n'
         return super(CreateAnnouncementView, self).form_valid(form)
+
+
+class AnnouncementDetailView(DetailView):
+    model = ItemModel
+    template_name = 'barter/Announcement_detail.html'
