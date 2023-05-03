@@ -15,75 +15,83 @@
 
   {% block content %}
 
-    <div class="d-flex justify-content-evenly">
-      <div class="row row-cols-1 row-cols-md-3 g-4" style="position: center">
-        <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{% static 'images/no_photo.png' %}" class="img-fluid rounded-start" alt="" style="height: 100%">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+{#        <div class="d-flex justify-content-evenly">#}
+          <div class="row row-cols-1 row-cols-md-3 g-4" style="position: center;">
+           {% for item in object_list %}
+            <div class="col">
+                <div class="card mb-3 h-100" style="max-width: 540px; left: 10%">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{% if item.photo %} {{ item.photo.url }} {% else %} {% static 'images/no_photo.png' %} {% endif %}"
+                           class="img-fluid rounded-start" alt="" style="height: 100%">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <p class="card-text"><small class="text-body-secondary">Created at {{ item.date_created.date }}. Sell in {{ item.place }}</small></p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
             </div>
-            </div>
-          <div class="col">
-            <div class="card mb-3 " style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{% static 'images/no_photo.png' %}" class="img-fluid rounded-start" alt="..." style="height: 100%">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Новые наручные часы Candino</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
-          <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{% static 'images/DreamWorks.jpg' %}" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
-          <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{% static 'images/DreamWorks.jpg' %}" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
-        </div>
-      </div>
+          {% endfor %}
+          </div>
+{#        </div>#}
+
      {% endblock %}
 
   </body>
 </html>
+
+
+{#          <div class="col">#}
+{#            <div class="card mb-3 " style="max-width: 540px;">#}
+{#              <div class="row g-0">#}
+{#                <div class="col-md-4">#}
+{#                  <img src="{% static 'images/no_photo.png' %}" class="img-fluid rounded-start" alt="..." style="height: 100%">#}
+{#                </div>#}
+{#                <div class="col-md-8">#}
+{#                  <div class="card-body">#}
+{#                    <h5 class="card-title">Новые наручные часы Candino</h5>#}
+{#                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              </div>#}
+{#          <div class="col">#}
+{#            <div class="card mb-3" style="max-width: 540px;">#}
+{#              <div class="row g-0">#}
+{#                <div class="col-md-4">#}
+{#                  <img src="{% static 'images/DreamWorks.jpg' %}" class="img-fluid rounded-start" alt="...">#}
+{#                </div>#}
+{#                <div class="col-md-8">#}
+{#                  <div class="card-body">#}
+{#                    <h5 class="card-title">Card title</h5>#}
+{#                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              </div>#}
+{#          <div class="col">#}
+{#            <div class="card mb-3" style="max-width: 540px;">#}
+{#              <div class="row g-0">#}
+{#                <div class="col-md-4">#}
+{#                  <img src="{% static 'images/DreamWorks.jpg' %}" class="img-fluid rounded-start" alt="...">#}
+{#                </div>#}
+{#                <div class="col-md-8">#}
+{#                  <div class="card-body">#}
+{#                    <h5 class="card-title">Card title</h5>#}
+{#                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+            {#        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              </div>#}

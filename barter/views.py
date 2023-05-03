@@ -1,4 +1,4 @@
-from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
@@ -6,8 +6,10 @@ from barter.models import ItemModel
 from barter.forms import CreateAnnouncementForm
 
 
-class BarterItemsView(TemplateView):
+class BarterItemsView(ListView):
     template_name = 'barter/items.html'
+    queryset = ItemModel.objects.all()
+    ordering = ('-date_created', )
 
 
 class CreateAnnouncementView(CreateView):
@@ -18,4 +20,6 @@ class CreateAnnouncementView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        if len(form.cleaned_data['description']) <= 25:
+            form.cleaned_data['description'] += 3 * '\n'
         return super(CreateAnnouncementView, self).form_valid(form)
