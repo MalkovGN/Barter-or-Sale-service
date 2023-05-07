@@ -82,9 +82,7 @@ class UserProfileForm(UserChangeForm):
             'class': 'form-control form-control-sm',
             'id': 'formFileSm',
             'type': 'file',
-        }
-    )
-    )
+        }), required=False)
 
     class Meta:
         model = User
