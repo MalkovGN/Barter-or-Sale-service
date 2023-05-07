@@ -2,14 +2,14 @@
 
 {% block content %}
 
-            {% if form.errors %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                     style="margin-top: 50px;">
-                    {{ form.errors }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+    {% if form.errors %}
+        <div class="errors"
+        style="position: relative; margin-top: 30px; top: -35px; background: white; color: darkred; text-align: center; font-weight: 500">
+
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
             {% endif %}
           <h2 class="text-uppercase text-center mb-5">Авторизация</h2>
 

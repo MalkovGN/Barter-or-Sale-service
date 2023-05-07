@@ -54,13 +54,14 @@ class UserLoginForm(AuthenticationForm):
             self.user_cache = authenticate(
                 self.request, username=username, password=password
             )
-            if not self.user_cache.is_verified_email:
-                raise ValidationError(
-                    'Your email is not verified!',
-                    code="invalid_login",
-                )
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
+            elif not self.user_cache.is_verified_email:
+                raise ValidationError(
+                    'Кажется, адрес электронной почты не подтвержден.\n'
+                    'Для подтверждения перейдите по ссылке из входящего письма.',
+                    code="unverified_email",
+                )
             else:
                 self.confirm_login_allowed(self.user_cache)
 
